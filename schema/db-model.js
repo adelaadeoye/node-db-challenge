@@ -11,7 +11,11 @@ function getProject() {
   return db("project");
 }
 function getTask() {
-    return db("tasks");
+    // return db("tasks")
+    return db("project")
+    .join('tasks','project.id','=',"tasks.project_id")
+    .select("*","project.name as Project Name","project.description as Project Description");
+
   }
   
 function addProject(proInfo) {

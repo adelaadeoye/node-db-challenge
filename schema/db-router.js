@@ -7,6 +7,13 @@ const router = express.Router();
 //get projects
 router.get("/", (req, res) => {
   db.getProject().then(project => {
+    project.map(item=>{
+        if(item.completed==1){
+            item.completed= true
+        }
+        else{
+            item.completed=false
+        }      })
     res.json(project);
   });
 });
@@ -14,6 +21,7 @@ router.get("/", (req, res) => {
 //add projects
 router.post("/addProject", (req, res) => {
   db.addProject(req.body).then(project => {
+     
     res.json(project);
   });
 });
@@ -21,6 +29,14 @@ router.post("/addProject", (req, res) => {
 //get tasks
 router.get("/tasks", (req, res) => {
   db.getTask().then(tasks => {
+    tasks.map(item=>{
+        if(item.completed==1){
+            item.completed= true
+        }
+        else{
+            item.completed=false
+        }
+    })
     res.json(tasks);
   });
 });
@@ -31,8 +47,9 @@ router.post("/addTask", (req, res) => {
     if (result.length == 0) {
       res.status(404).json("No such project exist");
     } else {
-      db.addTask(req.body).then(project => {
-        res.json(project);
+      db.addTask(req.body).then(task => {
+          
+        res.json(task);
       });
     }
   });
