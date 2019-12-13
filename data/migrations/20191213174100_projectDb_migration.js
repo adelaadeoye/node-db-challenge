@@ -4,9 +4,8 @@ exports.up = function(knex) {
         tbl.increments();
 
         tbl.string("name", 255)
-            .notNullable()
-            .unique();
-
+            .notNullable();
+            
         tbl.string("description",800);
 
         tbl.boolean("completed")
